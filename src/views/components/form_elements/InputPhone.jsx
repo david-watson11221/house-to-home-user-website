@@ -8,7 +8,7 @@ export default function InputPhone({ country, value, onChange }) {
       // country={country}
       value={value}
       onChange={(phone, countryData) => {
-        onChange && onChange(countryData.dialCode, phone);
+        onChange && onChange(countryData?.dialCode, countryData?.countryCode, phone);
       }}
       containerClass="custom_number_container"
       inputClass="form-control"

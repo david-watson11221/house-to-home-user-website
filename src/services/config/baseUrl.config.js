@@ -1,7 +1,7 @@
 export let BASE_URL;
 export let MEDIA_URL;
 
-const PORT = 6070;
+const PORT = 6080;
 
 if (window.location.hostname === "localhost") {
   BASE_URL = `https://localhost:${PORT}/api/v1`;

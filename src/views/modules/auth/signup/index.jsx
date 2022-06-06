@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { useMutation } from "react-query";
+import { Country, State, City } from "country-state-city";
+import { Link } from "react-router-dom";
+
+import { signup } from "../../../../services/auth";
 import InputPhone from "../../../components/form_elements/InputPhone";
 import Input from "../../../components/form_elements/Input";
 import Button from "../../../components/form_elements/Button";
 import Success from "../../../components/alerts/Success.Alert";
 import Warning from "../../../components/alerts/Warning.Alert";
 import Error from "../../../components/alerts/Error.Alert";
-import { signup } from "../../../../services/auth";
 import SignupIcon from "../../../components/icons/svgs/Signup.Icon";
-import { Link } from "react-router-dom";
 
 export default function Signup() {
   const [state, setState] = useState({
@@ -18,7 +20,7 @@ export default function Signup() {
     password: "",
     phoneNumber: {
       countryCode: "",
-      countryDialCode: "",
+      dialCode: "",
       number: "",
     },
     confirmPassword: "",
@@ -27,6 +29,8 @@ export default function Signup() {
     city: "",
     country: "",
   });
+  const countries = Country.getAllCountries();
+  const [cities, setCities] = useState([]);
 
   const { mutate, isLoading } = useMutation(() => signup(state), {
     retry: false,
@@ -39,6 +43,13 @@ export default function Signup() {
       Error(err?.response?.data?.message);
     },
   });
+
+  const handleChangeCountry = (e) => {
+    let code = e.target.value.split("?")[0];
+    let country = e.target.value.split("?")[1];
+    setState({ ...state, country });
+    setCities(City.getCitiesOfCountry(code));
+  };
 
   const handleSignup = () => {
     if (state?.password !== state?.confirmPassword) {
@@ -91,25 +102,31 @@ export default function Signup() {
                 <div className="col-md-12">
                   <InputPhone
                     placeholder="Enter Phone Number"
-                    country={state?.phoneNumber?.countryDialCode}
+                    country={state?.phoneNumber?.dialCode}
                     value={state?.phoneNumber?.number}
-                    onChange={(countryCode, phoneNumber) => {
-                      console.log(countryCode, phoneNumber);
+                    onChange={(dialCode, countryCode, number) => {
+                      setState({ ...state, phoneNumber: { dialCode, countryCode, number } });
                     }}
                   />
                 </div>
                 <div className="col-md-6">
-                  <select>
-                    <option value>Select Country</option>
-                    <option value>Select Country</option>
-                    <option value>Select Country</option>
+                  <select onChange={(e) => handleChangeCountry(e)}>
+                    <option value="">Select Country</option>
+                    {countries?.map((val, i) => (
+                      <option key={i} value={`${val.isoCode}?${val.name}`}>
+                        {val.name}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 <div className="col-md-6">
-                  <select>
-                    <option value>Select City</option>
-                    <option value>Select City</option>
-                    <option value>Select City</option>
+                  <select onChange={(e) => setState({ ...state, city: e.target.value })}>
+                    <option value="">Select City</option>
+                    {cities?.map((val, i) => (
+                      <option key={i} value={val.name}>
+                        {val.name}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 <div className="col-md-6">
@@ -140,11 +157,11 @@ export default function Signup() {
                 </div>
                 <div className="col-md-6">
                   <div className="paschan">
-                    <input
+                    <Input
+                      placeholder="Confirm Password*"
                       type="password"
                       value={state?.confirmPassword}
                       onChange={(confirmPassword) => setState({ ...state, confirmPassword })}
-                      placeholder="Confirm Password*"
                     />
                   </div>
                 </div>
@@ -166,9 +183,7 @@ export default function Signup() {
           </div>
           <div className="col-md-4">
             <div className="signup_right">
-              <div id="signup-login">
-                <SignupIcon />
-              </div>
+              <div id="signup-login">{/* <SignupIcon /> */}</div>
             </div>
           </div>
         </div>

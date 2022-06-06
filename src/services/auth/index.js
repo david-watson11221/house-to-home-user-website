@@ -3,14 +3,14 @@ import { API } from "../config/axios.config";
 export const signup = async (data) =>
   API({
     method: "PUT",
-    url: `/auth/user/register`,
+    url: `/auth/register`,
     data,
   });
 
 export const login = (data) =>
   API({
     method: "POST",
-    url: `/auth/user/login`,
+    url: `/auth/login`,
     data,
   });
 

@@ -1,38 +1,181 @@
-.App {
+body {
+  margin: 0;
+}
+
+.pagination {
+  display: inline-block;
+  padding-left: 15px;
+  padding-right: 15px;
+  cursor: pointer;
+  float: right !important;
+}
+
+.pagination > li {
+  display: inline-block;
+}
+
+.pagination > li > a {
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #000 !important;
+}
+
+.pagination > li > a:hover:not(.active) {
+  background-color: #68e5a9;
+  color: #fff !important;
+  /* background-color: #ddd; */
+  border-radius: 5px;
+}
+
+.pagination .active {
+  background-color: #68e5a9;
+  color: #fff !important;
+  /* background-color: #ddd; */
+  border-radius: 5px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* react date start */
+
+.react-datetime-picker__wrapper input {
+  padding: 0 10px !important;
+  box-shadow: none;
+  border-radius: 0 !important;
+}
+.react-datetime-picker__wrapper {
+  /* box-shadow: 0 0 10px 0 rgb(0, 0, 0, 0.5); */
+  padding: 10px;
+  /* border-radius: 30px; */
+}
+
+/* .react-time-picker__wrapper {
+  border: none !important; 
+}*/
+
+/* react date end */
+w/* 
+.btn {
+  display: inline-block;
+  font-weight: 400;
   text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+} */
+i.right-icon {
+  position: absolute;
+  top: 68%;
+  transform: translateY(-60%);
+  right: 16px;
+  cursor: pointer;
+}
+::placeholder {
+  color: #333333;
+  font-size: 16px;
+}
+button.btn.view-btn {
+  position: absolute;
+  right: 0px;
+  top: 15px;
+  background-color: transparent;
+}
+button.btn.view-btn i {
+  font-size: 14px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+button.btn-link {
+  border: none !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* .react-datetime-picker__wrapper {
+  border: none !important;
+} */
+
+.image-picker {
+  cursor: pointer !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.image-picker-inner {
+  width: 268px;
+  height: 160px;
 }
 
-.App-link {
-  color: #61dafb;
+.image-picker img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  object-position: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.image-picker-actions {
+  position: absolute;
+  top: 10px;
+  right: 80px;
 }
+
+.image-picker-actions button {
+  text-align: center;
+  font-size: 14px;
+  background: #fff;
+  color: red;
+  border: none;
+  border-radius: 99px;
+  height: 30px;
+  width: 30px;
+  padding: 2px 0px;
+  margin: 0px;
+}
+
+.react-slider-custom {
+  position: relative !important;
+}
+
+.slick-slide > div > div {
+  outline: none;
+}
+
+.react-slider-custom .slick-slide {
+  margin: unset !important;
+}
+
+.car-box {
+  padding: 0 15px;
+}
+
+/* .custom-input-icon {
+  top: 24px;
+}
+.search-btn {
+  background: transparent;
+  border: none;
+}
+.search-btn:focus {
+  outline: none;
+  border: none;
+}
+.custom-search-icon {
+  top: 50%;
+  transform: translateY(-50%);
+} */
