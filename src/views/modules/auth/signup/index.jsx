@@ -7,6 +7,8 @@ import Success from "../../../components/alerts/Success.Alert";
 import Warning from "../../../components/alerts/Warning.Alert";
 import Error from "../../../components/alerts/Error.Alert";
 import { signup } from "../../../../services/auth";
+import SignupIcon from "../../../components/icons/svgs/Signup.Icon";
+import { Link } from "react-router-dom";
 
 export default function Signup() {
   const [state, setState] = useState({
@@ -14,9 +16,16 @@ export default function Signup() {
     lastName: "",
     email: "",
     password: "",
-    countryCode: "",
-    phoneNumber: "",
+    phoneNumber: {
+      countryCode: "",
+      countryDialCode: "",
+      number: "",
+    },
     confirmPassword: "",
+    address: "",
+    zipCode: "",
+    city: "",
+    country: "",
   });
 
   const { mutate, isLoading } = useMutation(() => signup(state), {
@@ -40,107 +49,130 @@ export default function Signup() {
   };
 
   return (
-    <div
-      className="modal fade auth-modal"
-      id="modalSignUp"
-      tabIndex={-1}
-      aria-labelledby="logoutLabel"
-      aria-hidden="true"
-    >
-      <div className="modal-dialog modal-xl modal-dialog-centered">
-        <div className="modal-content">
-          <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-          <div className="modal-body">
-            <div className="row align-items-center">
-              <div className="col-lg-5 px-0">
-                <img src="assets/images/login-side.png" className="w-100 login-img d-block" />
-              </div>
-              <div className="col-lg-7 p-5">
-                <h4 className="secondary-hdng mb-sm-5 mb-3 text-center">
-                  Sign <span className="text-primary">Up</span>
-                </h4>
-                <form>
-                  <div className="row form-group">
-                    <div className="col-md-6 mb-4">
-                      <label className>First Name</label>
-                      <Input
-                        type="text"
-                        className="form-control"
-                        placeholder="First name"
-                        value={state?.firstName}
-                        onChange={(firstName) => setState({ ...state, firstName })}
-                      />
-                    </div>
-                    <div className="col-md-6 mb-4">
-                      <label className>Last Name</label>
-                      <Input
-                        type="text"
-                        className="form-control"
-                        placeholder="Enter Last Name"
-                        value={state?.lastName}
-                        onChange={(lastName) => setState({ ...state, lastName })}
-                      />
-                    </div>
-                    <div className="col-md-6 mb-4">
-                      <label className>Phone Number</label>
-                      <InputPhone
-                        className="form-control"
-                        placeholder="Enter Phone Number"
-                        country={state?.countryCode}
-                        value={state?.phoneNumber}
-                        onChange={(countryCode, phoneNumber) =>
-                          setState({ ...state, countryCode, phoneNumber })
-                        }
-                      />
-                      {/* <input type="text" className="form-control" placeholder="Enter Phone Number" /> */}
-                    </div>
-                    <div className="col-md-6 mb-4">
-                      <label>Email Address</label>
-                      <Input
-                        type="email"
-                        className="form-control"
-                        placeholder="Enter Email Address"
-                        id="exampleInputEmail1"
-                        value={state?.email}
-                        onChange={(email) => setState({ ...state, email })}
-                      />
-                    </div>
-                    <div className="col-md-6 mb-4 password-field">
-                      <label className>Password</label>
-                      <Input
-                        type="password"
-                        className="form-control"
-                        placeholder="Enter Password"
-                        value={state?.password}
-                        onChange={(password) => setState({ ...state, password })}
-                      />
-                      {/* <i className="toggle-password fas fa-eye" /> */}
-                    </div>
-                    <div className="col-md-6 mb-4 password-field">
-                      <label>Confirm Password</label>
-                      <Input
-                        type="password"
-                        className="form-control"
-                        placeholder="Enter Confirm Password"
-                        value={state?.confirmPassword}
-                        onChange={(confirmPassword) => setState({ ...state, confirmPassword })}
-                      />
-                      {/* <i className="toggle-password fas fa-eye" /> */}
-                    </div>
+    <section className="secsignup py-md-5 py-3">
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <div className="finspired_top heading_main text-left mb-md-5 mb-1">
+              <h3 className="h_57 mb-md-3 mb-1">Sign Up</h3>
+              <p className="h_20">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod</p>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-8">
+            <form>
+              <div className="row mb-md-5 mb-0">
+                <div className="col-md-6">
+                  <Input
+                    type="text"
+                    value={state?.firstName}
+                    onChange={(firstName) => setState({ ...state, firstName })}
+                    placeholder="Enter First Name*"
+                  />
+                </div>
+                <div className="col-md-6">
+                  <Input
+                    type="text"
+                    value={state?.lastName}
+                    onChange={(lastName) => setState({ ...state, lastName })}
+                    placeholder="Enter Last Name*"
+                  />
+                </div>
+                <div className="col-md-12">
+                  <Input
+                    type="email"
+                    name
+                    placeholder="Enter Email Address*"
+                    value={state?.email}
+                    onChange={(email) => setState({ ...state, email })}
+                  />
+                </div>
+                <div className="col-md-12">
+                  <InputPhone
+                    placeholder="Enter Phone Number"
+                    country={state?.phoneNumber?.countryDialCode}
+                    value={state?.phoneNumber?.number}
+                    onChange={(countryCode, phoneNumber) => {
+                      console.log(countryCode, phoneNumber);
+                    }}
+                  />
+                </div>
+                <div className="col-md-6">
+                  <select>
+                    <option value>Select Country</option>
+                    <option value>Select Country</option>
+                    <option value>Select Country</option>
+                  </select>
+                </div>
+                <div className="col-md-6">
+                  <select>
+                    <option value>Select City</option>
+                    <option value>Select City</option>
+                    <option value>Select City</option>
+                  </select>
+                </div>
+                <div className="col-md-6">
+                  <Input
+                    type="text"
+                    value={state?.address}
+                    onChange={(address) => setState({ ...state, address })}
+                    placeholder="Enter Address*"
+                  />
+                </div>
+                <div className="col-md-6">
+                  <Input
+                    type="number"
+                    placeholder="Enter Zip Code"
+                    value={state?.zipCode}
+                    onChange={(zipCode) => setState({ ...state, zipCode })}
+                  />
+                </div>
+                <div className="col-md-6">
+                  <div className="paschan">
+                    <Input
+                      type="password"
+                      value={state?.password}
+                      onChange={(password) => setState({ ...state, password })}
+                      placeholder="Enter Password*"
+                    />
                   </div>
-                  <div className="text-center mt-sm-5 mt-3">
-                    <Button className="btn btn-primary" loading={isLoading} onClick={handleSignup}>
-                      Sign Up
+                </div>
+                <div className="col-md-6">
+                  <div className="paschan">
+                    <input
+                      type="password"
+                      value={state?.confirmPassword}
+                      onChange={(confirmPassword) => setState({ ...state, confirmPassword })}
+                      placeholder="Confirm Password*"
+                    />
+                  </div>
+                </div>
+                <div className="col-md-12">
+                  <div className="button">
+                    <Button className="btn_orange h_18 px-4" loading={isLoading} onClick={handleSignup}>
+                      SIGN UP <img src="assets/images/arrow_right_white.png" alt="" />
                     </Button>
+                    <p className="h_20 text-gray">
+                      Don't have an account?{" "}
+                      <Link to="/login" className="text-darkblue h_20">
+                        <u>Sign In</u>
+                      </Link>
+                    </p>
                   </div>
-                </form>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div className="col-md-4">
+            <div className="signup_right">
+              <div id="signup-login">
+                <SignupIcon />
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

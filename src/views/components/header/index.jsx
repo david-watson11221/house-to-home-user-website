@@ -1,8 +1,11 @@
 import React from "react";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar() {
+  const { pathname } = useLocation();
+
   return (
-    <header>
+    <header className={pathname !== "/" ? "innerhead" : ""}>
       <div className="main-header">
         <div className="container">
           <div className="menu-Bar">
@@ -12,15 +15,15 @@ export default function Navbar() {
           </div>
           <div className="row align-items-center">
             <div className="col-md-2 text-left">
-              <a href="./" className="logo">
+              <Link to="/" className="logo">
                 <img src="assets/images/logo.png" alt="" />
-              </a>
+              </Link>
             </div>
             <div className="col-md-10 text-right">
               <div className="menuWrap">
                 <ul className="menu header_rboxm">
                   <li className="dropdown-nav storedropd first">
-                    <a href="store.php">Store</a>
+                    <Link to="/">Store</Link>
                     <div className="nav_dropdown dropdown">
                       <div className="container">
                         <div className="row align-items-center">
@@ -29,96 +32,64 @@ export default function Navbar() {
                               <div className="col">
                                 <ul>
                                   <li className="first">
-                                    <a href="products-category.php" title>
-                                      Category A
-                                    </a>
+                                    <Link to="/">Category A</Link>
                                   </li>
                                   <li>
-                                    <a href="products-category.php" title>
-                                      Category B
-                                    </a>
+                                    <Link to="/">Category B</Link>
                                   </li>
                                   <li>
-                                    <a href="products-category.php" title>
-                                      Category C
-                                    </a>
+                                    <Link to="/">Category C</Link>
                                   </li>
                                   <li className="last">
-                                    <a href="products-category.php" title>
-                                      Category D
-                                    </a>
+                                    <Link to="/">Category D</Link>
                                   </li>
                                 </ul>
                               </div>
                               <div className="col">
                                 <ul>
                                   <li className="first">
-                                    <a href="products-category.php" title>
-                                      Category E
-                                    </a>
+                                    <Link to="/">Category E</Link>
                                   </li>
                                   <li>
-                                    <a href="products-category.php" title>
-                                      Category F
-                                    </a>
+                                    <Link to="/">Category F</Link>
                                   </li>
                                   <li>
-                                    <a href="products-category.php" title>
-                                      Category G
-                                    </a>
+                                    <Link to="/">Category G</Link>
                                   </li>
                                   <li className="last">
-                                    <a href="products-category.php" title>
-                                      Category H
-                                    </a>
+                                    <Link to="/">Category H</Link>
                                   </li>
                                 </ul>
                               </div>
                               <div className="col">
                                 <ul>
                                   <li className="first">
-                                    <a href="products-category.php" title>
-                                      Category I
-                                    </a>
+                                    <Link to="/">Category I</Link>
                                   </li>
                                   <li>
-                                    <a href="products-category.php" title>
-                                      Category J
-                                    </a>
+                                    <Link to="/">Category J</Link>
                                   </li>
                                   <li>
-                                    <a href="products-category.php" title>
-                                      Category K
-                                    </a>
+                                    <Link to="/">Category K</Link>
                                   </li>
                                   <li className="last">
-                                    <a href="products-category.php" title>
-                                      Category L
-                                    </a>
+                                    <Link to="/">Category L</Link>
                                   </li>
                                 </ul>
                               </div>
                               <div className="col">
                                 <ul>
                                   <li className="first">
-                                    <a href="products-category.php" title>
-                                      Category M
-                                    </a>
+                                    <Link to="/">Category M</Link>
                                   </li>
                                   <li>
-                                    <a href="products-category.php" title>
-                                      Category N
-                                    </a>
+                                    <Link to="/">Category N</Link>
                                   </li>
                                   <li>
-                                    <a href="products-category.php" title>
-                                      Category O
-                                    </a>
+                                    <Link to="/">Category O</Link>
                                   </li>
                                   <li className="last">
-                                    <a href="products-category.php" title>
-                                      Category P
-                                    </a>
+                                    <Link to="/">Category P</Link>
                                   </li>
                                 </ul>
                               </div>
@@ -139,42 +110,42 @@ export default function Navbar() {
                     </div>
                   </li>
                   <li>
-                    <a href="javascript:;">Apply Now</a>
+                    <Link to="/">Apply Now</Link>
                   </li>
                   <li>
-                    <a href="products.php">Product Page</a>
+                    <Link to="/">Product Page</Link>
                   </li>
                   <li>
-                    <a href="javascript:;">How It Works</a>
+                    <Link to="/">How It Works</Link>
                   </li>
                   <li>
-                    <a href="about-us.php">About Us</a>
+                    <Link to="/">About Us</Link>
                   </li>
                   <li>
-                    <a href="faqs.php">FAQs</a>
+                    <Link to="/">FAQs</Link>
                   </li>
                   <li>
-                    <a href="javascript:;">Scheme</a>
+                    <Link to="/">Scheme</Link>
                   </li>
                   <li>
-                    <a href="contact-us.php">Contact Us</a>
+                    <Link to="/">Contact Us</Link>
                   </li>
                   <li className="isLoggedIn sign">
-                    <a href="sign-in.php">SIGN IN</a>
+                    <Link to="/login">SIGN IN</Link>
                   </li>
                   <li className="isLoggedIn sign">
-                    <a href="sign-up.php">SIGN UP</a>
+                    <Link to="/sign-up">SIGN UP</Link>
                   </li>
                   <li className="comment userhide123" style={{ display: "none" }}>
-                    <a href="javascript:;">
+                    <Link to="/">
                       <i className="far fa-shopping-bag" />
-                    </a>
+                    </Link>
                   </li>
                   <li className="notbell userhide123" style={{ display: "none" }}>
-                    <a href="notifications.php">
+                    <Link to="/">
                       <i className="far fa-bell" />
                       {/* <span>5</span>*/}
-                    </a>
+                    </Link>
                   </li>
                   <li className="userdrop userhide123 last" style={{ display: "none" }}>
                     <div className="dropdown">
@@ -189,27 +160,27 @@ export default function Navbar() {
                         <img src="assets/images/user_icon.png" alt="" /> Joshua
                       </button>
                       <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a className="dropdown-item" href="order-logs.php">
+                        <Link to="/" className="dropdown-item">
                           <i className="fas fa-file-alt" /> Order Logs
-                        </a>
-                        <a className="dropdown-item" href="payment-logs.php">
+                        </Link>
+                        <Link to="/" className="dropdown-item">
                           <i className="far fa-money-bill-alt" /> Payment Logs
-                        </a>
-                        <a className="dropdown-item" href="service-payment-logs.php">
+                        </Link>
+                        <Link to="/" className="dropdown-item">
                           <i className="fas fa-star-half-alt" /> Service Payment Logs
-                        </a>
-                        <a className="dropdown-item" href="wishlist.php">
+                        </Link>
+                        <Link to="/" className="dropdown-item">
                           <i className="far fa-heart" /> My Wishlist
-                        </a>
-                        <a className="dropdown-item" href="appointment-logs.php">
+                        </Link>
+                        <Link to="/" className="dropdown-item">
                           <i className="fal fa-calendar-check" /> Appointment Logs
-                        </a>
-                        <a className="dropdown-item" href="consultancy-logs.php">
+                        </Link>
+                        <Link to="/" className="dropdown-item">
                           <i className="fal fa-file-alt" /> Consultancy Logs
-                        </a>
-                        <a className="dropdown-item" href="profile.php">
+                        </Link>
+                        <Link to="/" className="dropdown-item">
                           <i className="far fa-user" /> Profile
-                        </a>
+                        </Link>
                         <a className="dropdown-item" data-toggle="modal" data-target=".logout_page">
                           <i className="far fa-sign-in" /> Logout
                         </a>
