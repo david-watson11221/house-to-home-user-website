@@ -37,7 +37,7 @@ export const resetPassword = (data) =>
 
 export const getMe = (data) =>
   API({
-    url: `/auth/user`,
+    url: `/auth`,
     method: "GET",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("JSON_WEB_TOKEN")}`,
