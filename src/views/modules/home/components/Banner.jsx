@@ -2,183 +2,209 @@ import React from "react";
 
 export default function Banner() {
   return (
-    <section className="hero-banner">
-      <div className="container">
-        <div className="row align-items-end hero-row mb-5">
-          <div className="col-lg-6 col-md-12">
-            <div className="hero-slider slick-initialized slick-slider slick-dotted">
-              <div className="slick-list draggable">
-                <div
-                  className="slick-track"
-                  style={{
-                    opacity: 1,
-                    width: "4340px",
-                    transform: "translate3d(-620px, 0px, 0px)",
-                  }}
-                >
-                  <div
-                    className="slick-slide slick-cloned"
-                    data-slick-index={-1}
-                    id
-                    aria-hidden="true"
-                    style={{ width: "590px" }}
-                    tabIndex={-1}
-                  >
-                    <h1 className="hero-heading mb-2">
-                      Find Your <span className="text-primary">Perfect</span>{" "}
-                    </h1>
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and unknown printer took a
-                      the scrambled it to make a type is printer took a the specimen book.
-                    </p>
-                  </div>
-                  <div
-                    className="slick-slide slick-current slick-active"
-                    data-slick-index={0}
-                    aria-hidden="false"
-                    style={{ width: "590px" }}
-                    tabIndex={0}
-                    role="tabpanel"
-                    id="slick-slide00"
-                    aria-describedby="slick-slide-control00"
-                  >
-                    <h1 className="hero-heading mb-2">
-                      Find Your <span className="text-primary">Perfect</span>{" "}
-                    </h1>
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and unknown printer took a
-                      the scrambled it to make a type is printer took a the specimen book.
-                    </p>
-                  </div>
-                  <div
-                    className="slick-slide"
-                    data-slick-index={1}
-                    aria-hidden="true"
-                    style={{ width: "590px" }}
-                    tabIndex={-1}
-                    role="tabpanel"
-                    id="slick-slide01"
-                    aria-describedby="slick-slide-control01"
-                  >
-                    <h1 className="hero-heading mb-2">
-                      Find Your <span className="text-primary">Perfect</span>{" "}
-                    </h1>
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and unknown printer took a
-                      the scrambled it to make a type is printer took a the specimen book.
-                    </p>
-                  </div>
-                  <div
-                    className="slick-slide"
-                    data-slick-index={2}
-                    aria-hidden="true"
-                    style={{ width: "590px" }}
-                    tabIndex={-1}
-                    role="tabpanel"
-                    id="slick-slide02"
-                    aria-describedby="slick-slide-control02"
-                  >
-                    <h1 className="hero-heading mb-2">
-                      Find Your <span className="text-primary">Perfect</span>{" "}
-                    </h1>
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and unknown printer took a
-                      the scrambled it to make a type is printer took a the specimen book.
-                    </p>
-                  </div>
-                  <div
-                    className="slick-slide slick-cloned"
-                    data-slick-index={3}
-                    id
-                    aria-hidden="true"
-                    style={{ width: "590px" }}
-                    tabIndex={-1}
-                  >
-                    <h1 className="hero-heading mb-2">
-                      Find Your <span className="text-primary">Perfect</span>{" "}
-                    </h1>
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and unknown printer took a
-                      the scrambled it to make a type is printer took a the specimen book.
-                    </p>
-                  </div>
-                  <div
-                    className="slick-slide slick-cloned"
-                    data-slick-index={4}
-                    id
-                    aria-hidden="true"
-                    style={{ width: "590px" }}
-                    tabIndex={-1}
-                  >
-                    <h1 className="hero-heading mb-2">
-                      Find Your <span className="text-primary">Perfect</span>{" "}
-                    </h1>
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and unknown printer took a
-                      the scrambled it to make a type is printer took a the specimen book.
-                    </p>
-                  </div>
-                  <div
-                    className="slick-slide slick-cloned"
-                    data-slick-index={5}
-                    id
-                    aria-hidden="true"
-                    style={{ width: "590px" }}
-                    tabIndex={-1}
-                  >
-                    <h1 className="hero-heading mb-2">
-                      Find Your <span className="text-primary">Perfect</span>{" "}
-                    </h1>
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and unknown printer took a
-                      the scrambled it to make a type is printer took a the specimen book.
-                    </p>
-                  </div>
+    <div className="banner_slider slick-initialized slick-slider slick-dotted">
+      <div className="slick-list draggable">
+        <div className="slick-track" style={{ opacity: 1, width: "5820px" }}>
+          <div
+            className="mainbanner slick-slide slick-current slick-active"
+            style={{
+              backgroundImage: 'url("assets/images/banner/bg-banner.jpg")',
+              width: "1910px",
+              position: "relative",
+              left: "0px",
+              top: "0px",
+              zIndex: 999,
+              opacity: 1,
+            }}
+            data-slick-index={0}
+            aria-hidden="false"
+            tabIndex={0}
+            role="tabpanel"
+            id="slick-slide00"
+            aria-describedby="slick-slide-control00"
+          >
+            <div className="container">
+              <div className="col-md-6 ml-auto">
+                <div className="mbanner_left">
+                  <h3 className="h_57">Need New Flooring ?</h3>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                    Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
+                  </p>
+                  <form className="row">
+                    <div className="col-md-6">
+                      <input type="text" name placeholder="Enter First Name" tabIndex={0} />
+                    </div>
+                    <div className="col-md-6">
+                      <input type="text" name placeholder="Enter Surname" tabIndex={0} />
+                    </div>
+                    <div className="col-md-12">
+                      <input type="number" name placeholder="Enter Post Code" tabIndex={0} />
+                    </div>
+                    <div className="col-md-12">
+                      <input type="number" name placeholder="Enter Mobile" tabIndex={0} />
+                    </div>
+                    <div className="col-md-12">
+                      <input type="email" name placeholder="Enter Email" tabIndex={0} />
+                    </div>
+                    <div className="col-md-12 text-md-center text-left">
+                      <button type className="btn_whitebor" tabIndex={0}>
+                        Sign Up <img src="assets/images/arrow_right_white.png" className="pl-3" alt="" />
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
-              <ul className="slick-dots" role="tablist">
-                <li className="slick-active first" role="presentation">
-                  <button
-                    type="button"
-                    role="tab"
-                    id="slick-slide-control00"
-                    aria-controls="slick-slide00"
-                    aria-label="1 of 3"
-                    tabIndex={0}
-                    aria-selected="true"
-                  >
-                    1
-                  </button>
-                </li>
-                <li role="presentation">
-                  <button
-                    type="button"
-                    role="tab"
-                    id="slick-slide-control01"
-                    aria-controls="slick-slide01"
-                    aria-label="2 of 3"
-                    tabIndex={-1}
-                  >
-                    2
-                  </button>
-                </li>
-                <li role="presentation" className="last">
-                  <button
-                    type="button"
-                    role="tab"
-                    id="slick-slide-control02"
-                    aria-controls="slick-slide02"
-                    aria-label="3 of 3"
-                    tabIndex={-1}
-                  >
-                    3
-                  </button>
-                </li>
-              </ul>
             </div>
+            <h1>House 2 home</h1>
+          </div>
+          <div
+            className="mainbanner slick-slide"
+            style={{
+              backgroundImage: 'url("assets/images/banner/bg-banner.jpg")',
+              width: "1910px",
+              position: "relative",
+              left: "-1940px",
+              top: "0px",
+              zIndex: 998,
+              opacity: 0,
+            }}
+            data-slick-index={1}
+            aria-hidden="true"
+            tabIndex={-1}
+            role="tabpanel"
+            id="slick-slide01"
+            aria-describedby="slick-slide-control01"
+          >
+            <div className="container">
+              <div className="col-md-6 ml-auto">
+                <div className="mbanner_left">
+                  <h3 className="h_57">Need New Flooring ?</h3>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                    Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
+                  </p>
+                  <form className="row">
+                    <div className="col-md-6">
+                      <input type="text" name placeholder="Enter First Name" tabIndex={-1} />
+                    </div>
+                    <div className="col-md-6">
+                      <input type="text" name placeholder="Enter Surname" tabIndex={-1} />
+                    </div>
+                    <div className="col-md-12">
+                      <input type="number" name placeholder="Enter Post Code" tabIndex={-1} />
+                    </div>
+                    <div className="col-md-12">
+                      <input type="number" name placeholder="Enter Mobile" tabIndex={-1} />
+                    </div>
+                    <div className="col-md-12">
+                      <input type="email" name placeholder="Enter Email" tabIndex={-1} />
+                    </div>
+                    <div className="col-md-12 text-md-center text-left">
+                      <button type className="btn_whitebor" tabIndex={-1}>
+                        Sign Up <img src="assets/images/arrow_right_white.png" className="pl-3" alt="" />
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <h1>House 2 home</h1>
+          </div>
+          <div
+            className="mainbanner slick-slide"
+            style={{
+              backgroundImage: 'url("assets/images/banner/bg-banner.jpg")',
+              width: "1910px",
+              position: "relative",
+              left: "-3880px",
+              top: "0px",
+              zIndex: 998,
+              opacity: 0,
+            }}
+            data-slick-index={2}
+            aria-hidden="true"
+            tabIndex={-1}
+            role="tabpanel"
+            id="slick-slide02"
+            aria-describedby="slick-slide-control02"
+          >
+            <div className="container">
+              <div className="col-md-6 ml-auto">
+                <div className="mbanner_left">
+                  <h3 className="h_57">Need New Flooring ?</h3>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                    Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
+                  </p>
+                  <form className="row">
+                    <div className="col-md-6">
+                      <input type="text" name placeholder="Enter First Name" tabIndex={-1} />
+                    </div>
+                    <div className="col-md-6">
+                      <input type="text" name placeholder="Enter Surname" tabIndex={-1} />
+                    </div>
+                    <div className="col-md-12">
+                      <input type="number" name placeholder="Enter Post Code" tabIndex={-1} />
+                    </div>
+                    <div className="col-md-12">
+                      <input type="number" name placeholder="Enter Mobile" tabIndex={-1} />
+                    </div>
+                    <div className="col-md-12">
+                      <input type="email" name placeholder="Enter Email" tabIndex={-1} />
+                    </div>
+                    <div className="col-md-12 text-md-center text-left">
+                      <button type className="btn_whitebor" tabIndex={-1}>
+                        Sign Up <img src="assets/images/arrow_right_white.png" className="pl-3" alt="" />
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <h1>House 2 home</h1>
           </div>
         </div>
       </div>
-    </section>
+      <ul className="slick-dots" style={{}} role="tablist">
+        <li className="slick-active first" role="presentation">
+          <button
+            type="button"
+            role="tab"
+            id="slick-slide-control00"
+            aria-controls="slick-slide00"
+            aria-label="1 of 3"
+            tabIndex={0}
+            aria-selected="true"
+          >
+            1
+          </button>
+        </li>
+        <li role="presentation">
+          <button
+            type="button"
+            role="tab"
+            id="slick-slide-control01"
+            aria-controls="slick-slide01"
+            aria-label="2 of 3"
+            tabIndex={-1}
+          >
+            2
+          </button>
+        </li>
+        <li role="presentation" className="last">
+          <button
+            type="button"
+            role="tab"
+            id="slick-slide-control02"
+            aria-controls="slick-slide02"
+            aria-label="3 of 3"
+            tabIndex={-1}
+          >
+            3
+          </button>
+        </li>
+      </ul>
+    </div>
   );
 }

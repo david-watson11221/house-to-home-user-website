@@ -1,5 +1,8 @@
 import { useEffect } from "react";
 
-export default function useLocationTitle(title) {
-  useEffect(() => (document.title = `GY Autos | ${title}`));
+export function useLocationTitle(title) {
+  title = title ? title : "Admin";
+  useEffect(() => {
+    document.title = `House to Home | ${title}`;
+  });
 }

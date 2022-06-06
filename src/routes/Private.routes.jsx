@@ -6,7 +6,6 @@ import { useRecoilState } from "recoil";
 import { getMe } from "../services";
 import { useLocationTitle } from "../hooks";
 import { userState } from "../store";
-import Layout from "../views/layouts";
 
 export default function PrivateRoutes({ children, title, ...rest }) {
   const navigate = useNavigate();
@@ -55,5 +54,5 @@ export default function PrivateRoutes({ children, title, ...rest }) {
       </div>
     );
 
-  return <Layout>{children}</Layout>;
+  return children;
 }
