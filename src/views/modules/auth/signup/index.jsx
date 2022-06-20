@@ -44,7 +44,7 @@ export default function Signup() {
     retry: false,
     onSuccess: (res) => {
       Success(res?.data?.message);
-      window.location.replace("/login");
+      navigate("/login");
     },
     onError: (err) => {
       // console.log(err);

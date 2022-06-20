@@ -1,4 +1,5 @@
 import React from "react";
+import SignupForm from "./SignupForm";
 
 export default function Banner() {
   return (
@@ -31,28 +32,7 @@ export default function Banner() {
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
                     Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
                   </p>
-                  <form className="row">
-                    <div className="col-md-6">
-                      <input type="text" name placeholder="Enter First Name" tabIndex={0} />
-                    </div>
-                    <div className="col-md-6">
-                      <input type="text" name placeholder="Enter Surname" tabIndex={0} />
-                    </div>
-                    <div className="col-md-12">
-                      <input type="number" name placeholder="Enter Post Code" tabIndex={0} />
-                    </div>
-                    <div className="col-md-12">
-                      <input type="number" name placeholder="Enter Mobile" tabIndex={0} />
-                    </div>
-                    <div className="col-md-12">
-                      <input type="email" name placeholder="Enter Email" tabIndex={0} />
-                    </div>
-                    <div className="col-md-12 text-md-center text-left">
-                      <button type className="btn_whitebor" tabIndex={0}>
-                        Sign Up <img src="assets/images/arrow_right_white.png" className="pl-3" alt="" />
-                      </button>
-                    </div>
-                  </form>
+                  <SignupForm />
                 </div>
               </div>
             </div>

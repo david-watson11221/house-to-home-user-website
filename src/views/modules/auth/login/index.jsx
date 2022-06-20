@@ -106,7 +106,6 @@ export default function Login() {
                       value={state?.password}
                       onChange={(password) => setState({ ...state, password })}
                     />
-                    <i className="far fa-eye-slash toggle_password" />
                   </div>
                 </div>
                 <div className="col-md-12 text-right">

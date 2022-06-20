@@ -60,9 +60,13 @@ export default function Input({
         // <button type="button" className={passWordButtonClssName} onClick={() => setShowPassword(!showPassword)}>
         //   {showPassword ? <i className="fa fa-eye passDisplay" /> : <i className="fa fa-eye-slash passDisplay" />}
         // </button>
-        <button type="button" className="not_btn eye_btns" onClick={() => setShowPassword(!showPassword)}>
-          {showPassword ? <i className="fa fa-eye passDisplay" /> : <i className="fa fa-eye-slash passDisplay" />}
-        </button>
+        <a className="not_btn eye_btns" onClick={() => setShowPassword(!showPassword)}>
+          {showPassword ? (
+            <i className="fa fa-eye passDisplay" />
+          ) : (
+            <i className="fa fa-eye-slash passDisplay" />
+          )}
+        </a>
       ) : (
         <div className="form-control-position custom-input-icon custom-search-icon" style={{ width: "3rem" }}>
           {startIcon ? startIcon : null}
