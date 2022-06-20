@@ -71,7 +71,7 @@ export default function Login() {
           background: "#fff",
         }}
       >
-        <img src="images/logo.png" />
+        <img src="assets/images/logo.png" />
       </div>
     );
 

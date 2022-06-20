@@ -1,8 +1,13 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+
+import { userState } from "../../../store";
 
 export default function Navbar() {
   const { pathname } = useLocation();
+  const authToken = localStorage.getItem("JSON_WEB_TOKEN");
+  const user = useRecoilValue(userState);
 
   return (
     <header className={pathname !== "/" ? "innerhead" : ""}>
@@ -130,63 +135,69 @@ export default function Navbar() {
                   <li>
                     <Link to="/">Contact Us</Link>
                   </li>
-                  <li className="isLoggedIn sign">
-                    <Link to="/login">SIGN IN</Link>
-                  </li>
-                  <li className="isLoggedIn sign">
-                    <Link to="/sign-up">SIGN UP</Link>
-                  </li>
-                  <li className="comment userhide123" style={{ display: "none" }}>
-                    <Link to="/">
-                      <i className="far fa-shopping-bag" />
-                    </Link>
-                  </li>
-                  <li className="notbell userhide123" style={{ display: "none" }}>
-                    <Link to="/">
-                      <i className="far fa-bell" />
-                      {/* <span>5</span>*/}
-                    </Link>
-                  </li>
-                  <li className="userdrop userhide123 last" style={{ display: "none" }}>
-                    <div className="dropdown">
-                      <button
-                        className="dropdown-toggle"
-                        type="button"
-                        id="dropdownMenuButton"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        <img src="assets/images/user_icon.png" alt="" /> Joshua
-                      </button>
-                      <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <Link to="/" className="dropdown-item">
-                          <i className="fas fa-file-alt" /> Order Logs
+                  {authToken ? (
+                    <>
+                      <li className="comment">
+                        <Link to="/">
+                          <i className="far fa-shopping-bag" />
                         </Link>
-                        <Link to="/" className="dropdown-item">
-                          <i className="far fa-money-bill-alt" /> Payment Logs
+                      </li>
+                      <li className="notbell">
+                        <Link to="/">
+                          <i className="far fa-bell" />
                         </Link>
-                        <Link to="/" className="dropdown-item">
-                          <i className="fas fa-star-half-alt" /> Service Payment Logs
-                        </Link>
-                        <Link to="/" className="dropdown-item">
-                          <i className="far fa-heart" /> My Wishlist
-                        </Link>
-                        <Link to="/" className="dropdown-item">
-                          <i className="fal fa-calendar-check" /> Appointment Logs
-                        </Link>
-                        <Link to="/" className="dropdown-item">
-                          <i className="fal fa-file-alt" /> Consultancy Logs
-                        </Link>
-                        <Link to="/" className="dropdown-item">
-                          <i className="far fa-user" /> Profile
-                        </Link>
-                        <a className="dropdown-item" data-toggle="modal" data-target=".logout_page">
-                          <i className="far fa-sign-in" /> Logout
-                        </a>
-                      </div>
-                    </div>
-                  </li>
+                      </li>
+                      <li className="userdrop last">
+                        <div className="dropdown">
+                          <button
+                            className="dropdown-toggle"
+                            type="button"
+                            id="dropdownMenuButton"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                          >
+                            <img src="assets/images/user_icon.png" alt="" /> {user?.firstName}
+                          </button>
+                          <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <Link to="/" className="dropdown-item">
+                              <i className="fas fa-file-alt" /> Order Logs
+                            </Link>
+                            <Link to="/" className="dropdown-item">
+                              <i className="far fa-money-bill-alt" /> Payment Logs
+                            </Link>
+                            <Link to="/" className="dropdown-item">
+                              <i className="fas fa-star-half-alt" /> Service Payment Logs
+                            </Link>
+                            <Link to="/" className="dropdown-item">
+                              <i className="far fa-heart" /> My Wishlist
+                            </Link>
+                            <Link to="/" className="dropdown-item">
+                              <i className="fal fa-calendar-check" /> Appointment Logs
+                            </Link>
+                            <Link to="/" className="dropdown-item">
+                              <i className="fal fa-file-alt" /> Consultancy Logs
+                            </Link>
+                            <Link to="/" className="dropdown-item">
+                              <i className="far fa-user" /> Profile
+                            </Link>
+                            <a className="dropdown-item" data-toggle="modal" data-target=".logout_page">
+                              <i className="far fa-sign-in" /> Logout
+                            </a>
+                          </div>
+                        </div>
+                      </li>
+                    </>
+                  ) : (
+                    <>
+                      <li className="isLoggedIn sign">
+                        <Link to="/login">SIGN IN</Link>
+                      </li>
+                      <li className="isLoggedIn sign">
+                        <Link to="/sign-up">SIGN UP</Link>
+                      </li>
+                    </>
+                  )}
                 </ul>
               </div>
             </div>

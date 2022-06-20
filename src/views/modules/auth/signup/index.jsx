@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useMutation } from "react-query";
-import { Country, State, City } from "country-state-city";
-import { Link } from "react-router-dom";
+import { Country, City } from "country-state-city";
+import { Link, useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 
-import { signup } from "../../../../services/auth";
+import { signup, getMe } from "../../../../services/auth";
+import { userState } from "../../../../store";
 import InputPhone from "../../../components/form_elements/InputPhone";
 import Input from "../../../components/form_elements/Input";
 import Button from "../../../components/form_elements/Button";
@@ -11,8 +13,10 @@ import Success from "../../../components/alerts/Success.Alert";
 import Warning from "../../../components/alerts/Warning.Alert";
 import Error from "../../../components/alerts/Error.Alert";
 import SignupIcon from "../../../components/icons/svgs/Signup.Icon";
+import Spinner from "../../../components/loaders/Spinner";
 
 export default function Signup() {
+  const Token = localStorage.getItem("JSON_WEB_TOKEN");
   const [state, setState] = useState({
     firstName: "",
     lastName: "",
@@ -31,12 +35,16 @@ export default function Signup() {
   });
   const countries = Country.getAllCountries();
   const [cities, setCities] = useState([]);
+  const [loadingCities, setLaodingCities] = useState(false);
+  const [user, setUser] = useRecoilState(userState);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const { mutate, isLoading } = useMutation(() => signup(state), {
     retry: false,
     onSuccess: (res) => {
       Success(res?.data?.message);
-      window.location.reload();
+      window.location.replace("/login");
     },
     onError: (err) => {
       // console.log(err);
@@ -45,10 +53,14 @@ export default function Signup() {
   });
 
   const handleChangeCountry = (e) => {
+    setLaodingCities(true);
     let code = e.target.value.split("?")[0];
     let country = e.target.value.split("?")[1];
     setState({ ...state, country });
     setCities(City.getCitiesOfCountry(code));
+    setTimeout(() => {
+      setLaodingCities(false);
+    }, 15000);
   };
 
   const handleSignup = () => {
@@ -58,6 +70,45 @@ export default function Signup() {
       mutate();
     }
   };
+
+  const { mutate: handleGetLoggedInUser } = useMutation(() => getMe(), {
+    retry: false,
+    onSuccess: (res) => {
+      setUser(res?.data?.user);
+      navigate("/");
+    },
+    onError: (err) => {
+      console.log(err);
+      localStorage.clear();
+      navigate("/login");
+      setLoading(false);
+    },
+  });
+
+  useEffect(() => {
+    if (Token) {
+      setLoading(true);
+      handleGetLoggedInUser();
+    } else {
+      setLoading(false);
+    }
+  }, []);
+
+  if (loading)
+    return (
+      <div
+        style={{
+          height: "100vh",
+          // width: "100vw",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          background: "#fff",
+        }}
+      >
+        <img src="assets/images/logo.png" />
+      </div>
+    );
 
   return (
     <section className="secsignup py-md-5 py-3">
@@ -108,6 +159,7 @@ export default function Signup() {
                       setState({ ...state, phoneNumber: { dialCode, countryCode, number } });
                     }}
                   />
+                  <br />
                 </div>
                 <div className="col-md-6">
                   <select onChange={(e) => handleChangeCountry(e)}>
@@ -119,16 +171,22 @@ export default function Signup() {
                     ))}
                   </select>
                 </div>
+
                 <div className="col-md-6">
-                  <select onChange={(e) => setState({ ...state, city: e.target.value })}>
-                    <option value="">Select City</option>
-                    {cities?.map((val, i) => (
-                      <option key={i} value={val.name}>
-                        {val.name}
-                      </option>
-                    ))}
-                  </select>
+                  {loadingCities ? (
+                    <Spinner />
+                  ) : (
+                    <select onChange={(e) => setState({ ...state, city: e.target.value })}>
+                      <option value="">Select City</option>
+                      {cities?.map((val, i) => (
+                        <option key={i} value={val.name}>
+                          {val.name}
+                        </option>
+                      ))}
+                    </select>
+                  )}
                 </div>
+
                 <div className="col-md-6">
                   <Input
                     type="text"
