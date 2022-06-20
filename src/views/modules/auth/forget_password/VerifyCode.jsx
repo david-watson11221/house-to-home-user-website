@@ -2,23 +2,22 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 
-import { recoverPassword } from "../../../../services";
+import { verifyCode } from "../../../../services";
 
 import Input from "../../../components/form_elements/Input";
 import Button from "../../../components/form_elements/Button";
-import Success from "../../../components/alerts/Success.Alert";
 import Error from "../../../components/alerts/Error.Alert";
 
-export default function ForgetPassword() {
+export default function VerifyCode() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState();
+  const email = localStorage.getItem("forgetPasswordEmail");
+  const [code, setCode] = useState("");
 
-  const { mutate, isLoading } = useMutation(() => recoverPassword({ email }), {
+  const { mutate, isLoading } = useMutation(() => verifyCode({ code, email }), {
     retry: false,
-    onSuccess: (res) => {
-      localStorage.setItem("forgetPasswordEmail", email);
-      Success(res?.data?.message);
-      navigate("/forget-password/code");
+    onSuccess: () => {
+      localStorage.setItem("forgetPasswordCode", code);
+      navigate("/reset-password");
     },
     onError: (err) => Error(err?.response?.data?.message),
   });
@@ -29,20 +28,25 @@ export default function ForgetPassword() {
         <div className="row align-items-center">
           <div className="col-md-6">
             <form>
-              <div className="row">
+              <div className="row mb-md-5 mb-0">
                 <div className="col-md-12">
                   <div className="finspired_top heading_main text-left mb-md-5 mb-1">
                     <h3 className="h_57 mb-md-3 mb-1">FORGOT PASSWORD</h3>
-                    <p className="h_20">Kindly enter your email address to change the password.</p>
+                    <p className="h_20">Kindly enter your verification code</p>
                   </div>
                 </div>
                 <div className="col-md-12">
                   <Input
-                    type="text"
-                    placeholder="Enter Email Address*"
-                    value={email}
-                    onChange={(email) => setEmail(email)}
+                    type="number"
+                    placeholder="Enter Verification Code*"
+                    value={code}
+                    onChange={(code) => setCode(code)}
                   />
+                </div>
+                <div className="col-md-12 text-right">
+                  <a onClick={mutate} className="text-darkblue h_24 mb-3 pl-3">
+                    <u>Resend code</u>
+                  </a>
                 </div>
                 <div className="col-md-12">
                   <div className="button">

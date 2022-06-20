@@ -181,7 +181,13 @@ export default function Navbar() {
                             <Link to="/" className="dropdown-item">
                               <i className="far fa-user" /> Profile
                             </Link>
-                            <a className="dropdown-item" data-toggle="modal" data-target=".logout_page">
+                            <a
+                              className="dropdown-item"
+                              onClick={() => {
+                                localStorage.clear();
+                                window.location.reload();
+                              }}
+                            >
                               <i className="far fa-sign-in" /> Logout
                             </a>
                           </div>

@@ -110,7 +110,7 @@ export default function Login() {
                   </div>
                 </div>
                 <div className="col-md-12 text-right">
-                  <Link to="forget-password" className="text-darkblue h_24 mb-3">
+                  <Link to="/forget-password" className="text-darkblue h_24 mb-3">
                     <u>Forgot Password ?</u>
                   </Link>
                 </div>
