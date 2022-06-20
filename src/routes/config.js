@@ -5,6 +5,10 @@ import VerifyCode from "../views/modules/auth/forget_password/VerifyCode";
 import ResetPassword from "../views/modules/auth/forget_password/ResetPassword";
 import Home from "../views/modules/home";
 
+import Profile from "../views/modules/my_account";
+import EditProfile from "../views/modules/my_account/EditProfile";
+import ChangePassword from "../views/modules/my_account/ChangePassword";
+
 export const ROUTES = [
   {
     title: "Sign Up",
@@ -41,5 +45,26 @@ export const ROUTES = [
     path: "/",
     type: "public",
     component: Home,
+  },
+
+  // MY Account
+
+  {
+    title: "My Profile",
+    path: "/profile",
+    type: "private",
+    component: Profile,
+  },
+  {
+    title: "Edit Profile",
+    path: "/edit-profile",
+    type: "private",
+    component: EditProfile,
+  },
+  {
+    title: "Change Password",
+    path: "/change-password",
+    type: "private",
+    component: ChangePassword,
   },
 ];

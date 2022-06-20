@@ -178,7 +178,7 @@ export default function Navbar() {
                             <Link to="/" className="dropdown-item">
                               <i className="fal fa-file-alt" /> Consultancy Logs
                             </Link>
-                            <Link to="/" className="dropdown-item">
+                            <Link to="/profile" className="dropdown-item">
                               <i className="far fa-user" /> Profile
                             </Link>
                             <a
