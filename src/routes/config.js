@@ -8,6 +8,7 @@ import Home from "../views/modules/home";
 import Profile from "../views/modules/my_account";
 import EditProfile from "../views/modules/my_account/EditProfile";
 import ChangePassword from "../views/modules/my_account/ChangePassword";
+import ContactUs from "../views/modules/contact_us";
 
 export const ROUTES = [
   {
@@ -66,5 +67,12 @@ export const ROUTES = [
     path: "/change-password",
     type: "private",
     component: ChangePassword,
+  },
+
+  {
+    title: "Contact Us",
+    path: "/contact-us",
+    type: "private",
+    component: ContactUs,
   },
 ];

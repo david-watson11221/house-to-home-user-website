@@ -133,7 +133,7 @@ export default function Navbar() {
                     <Link to="/">Scheme</Link>
                   </li>
                   <li>
-                    <Link to="/">Contact Us</Link>
+                    <Link to="/contact-us">Contact Us</Link>
                   </li>
                   {authToken ? (
                     <>
