@@ -6,7 +6,8 @@ export default function ImageSelector({ accept, onChange, value, onDelete }) {
   const imageRef = useRef();
 
   useEffect(() => {
-    setDefaultImage(`${MEDIA_URL}${value}`);
+    // setDefaultImage(`${MEDIA_URL}${value}`);
+    setDefaultImage(value);
     if (value && typeof value !== "string") {
       const objectURL = URL.createObjectURL(value);
       setDefaultImage(objectURL);
@@ -15,45 +16,28 @@ export default function ImageSelector({ accept, onChange, value, onDelete }) {
   }, [value]);
 
   return (
-    <div className="profile_tboxl">
-      <img
-        src={value ? defaultImage : "assets/images/profile_tboxl.png"}
-        alt=""
-        className="userImage img-fluid"
-      />
-      <label htmlFor="userImage" className="uploadCamera">
-        <i className="fas fa-camera" />
-      </label>
+    <div className="profile_tboxl image-picker">
+      <div className="image-picker-inner">
+        <img
+          src={value ? defaultImage : "assets/images/userImage.png"}
+          alt=""
+          title={!value && "Click to upload Image"}
+          className="img-fluid pointer"
+          onClick={() => {
+            imageRef.current.click();
+          }}
+        />
+      </div>
       <input
+        ref={imageRef}
         type="file"
-        id="userImage"
-        accept="image/*"
-        className="d-none"
+        style={{ display: "none" }}
+        accept={accept ? accept : "image/*"}
         onChange={(e) => onChange(e.target.files[0])}
+        onClick={(event) => {
+          event.target.value = null;
+        }}
       />
     </div>
-    // <div className="image-picker">
-    //   <div className="image-picker-inner">
-    //     <img
-    //       src={value ? defaultImage : imagePlaceholder}
-    //       alt=""
-    //       title={!value && "Click to upload Image"}
-    //       className="img-fluid pointer"
-    //       onClick={() => {
-    //         imageRef.current.click();
-    //       }}
-    //     />
-    //   </div>
-    //   <input
-    //     ref={imageRef}
-    //     type="file"
-    //     style={{ display: "none" }}
-    //     accept={accept ? accept : "image/*"}
-    //     onChange={(e) => onChange(e.target.files[0])}
-    //     onClick={(event) => {
-    //       event.target.value = null;
-    //     }}
-    //   />
-    // </div>
   );
 }

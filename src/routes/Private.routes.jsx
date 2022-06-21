@@ -16,7 +16,7 @@ export default function PrivateRoutes({ children, title, ...rest }) {
     retry: false,
     onSuccess: (res) => {
       // console.log("res.dataL: ", res.data);
-      setUser(res?.data?.admin);
+      setUser(res?.data?.user);
       setLoading(false);
     },
     onError: (err) => {
@@ -50,7 +50,7 @@ export default function PrivateRoutes({ children, title, ...rest }) {
           marginTop: -56,
         }}
       >
-        <img src="images/loginLogo.png" alt="logo" />
+        <img src="assets/images/logo.png" />
       </div>
     );
 

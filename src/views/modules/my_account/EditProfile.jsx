@@ -2,23 +2,41 @@ import React, { useState } from "react";
 import { useMutation } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
+import { Country, City } from "country-state-city";
 
 import { updateProfile } from "../../../services";
 import { userState } from "../../../store";
 
 import Input from "../../components/form_elements/Input";
 import ImagePicker from "../../components/form_elements/ImagePicker";
+import InputPhone from "../../components/form_elements/InputPhone";
 import Button from "../../components/form_elements/Button";
 import Success from "../../components/alerts/Success.Alert";
 import Error from "../../components/alerts/Error.Alert";
+import Spinner from "../../components/loaders/Spinner";
 
 export default function EditProfile() {
-  const user = useRecoilValue(userState);
   const navigate = useNavigate();
+  const user = useRecoilValue(userState);
+  const countries = Country.getAllCountries();
+  const [cities, setCities] = useState([]);
+  const [loadingCities, setLaodingCities] = useState(false);
+  const [state, setState] = useState({
+    firstName: user?.firstName || "",
+    lastName: user?.lastName || "",
+    phoneNumber: {
+      countryCode: user?.phoneNumber?.countryCode || "",
+      dialCode: user?.phoneNumber?.dialCode || "",
+      number: user?.phoneNumber?.number || "",
+    },
+    profileImage: user?.profileImage || "",
+    address: user?.address || "",
+    zipCode: user?.zipCode || "",
+    city: user?.city || "",
+    country: user?.country || "",
+  });
 
-  const [state, setState] = useState({});
-
-  const { mutate, isLoading } = useMutation(() => updateProfile(), {
+  const { mutate, isLoading } = useMutation((data) => updateProfile(data, user?._id), {
     onSuccess: (res) => {
       Success(res?.data?.message);
     },
@@ -27,6 +45,30 @@ export default function EditProfile() {
     },
   });
 
+  const handleChangeCountry = (e) => {
+    setLaodingCities(true);
+    let code = e.target.value.split("?")[0];
+    let country = e.target.value.split("?")[1];
+    setState({ ...state, country });
+    setCities(City.getCitiesOfCountry(code));
+    setTimeout(() => {
+      setLaodingCities(false);
+    }, 1500);
+  };
+
+  const handleUpdateProfile = () => {
+    const form_data = new FormData();
+    form_data.append("firstName", state.firstName);
+    form_data.append("lastName", state.lastName);
+    form_data.append("phoneNumber", JSON.stringify(state.phoneNumber));
+    form_data.append("address", state.address);
+    form_data.append("zipCode", state.zipCode);
+    form_data.append("country", state.country);
+    form_data.append("city", state.city);
+    if (state?.profileImage) form_data.append("profileImage", state.profileImage);
+    mutate(form_data);
+  };
+
   return (
     <section className="secaddcard paddingtb">
       <div className="container">
@@ -34,7 +76,8 @@ export default function EditProfile() {
           <div className="col-md-12">
             <div className="d-block d-md-flex justify-content-between mb-5 align-items-center">
               <h3 className="h_57 black mb-0">
-                <i onclick="history.go(-1)" className="far fa-long-arrow-left pr-md-4 pr-0" /> Edit Profile
+                <i onClick={() => navigate(-1)} className="far fa-long-arrow-left pr-md-4 pr-0" /> Edit
+                Profile
               </h3>
             </div>
           </div>
@@ -62,7 +105,13 @@ export default function EditProfile() {
                           </h5>
                         </div>
                         <div className="col-md-8">
-                          <input type="text" name placeholder="Mark" className="mb-md-0 mb-2" />
+                          <Input
+                            type="text"
+                            placeholder="Mark"
+                            className="mb-md-0 mb-2"
+                            value={state?.firstName}
+                            onChange={(firstName) => setState({ ...state, firstName })}
+                          />
                         </div>
                       </div>
                       <div className="row mb-md-3 mb-0 align-items-baseline">
@@ -72,7 +121,13 @@ export default function EditProfile() {
                           </h5>
                         </div>
                         <div className="col-md-8">
-                          <input type="text" name placeholder="Carson" className="mb-md-0 mb-2" />
+                          <input
+                            type="text"
+                            placeholder="Carson"
+                            className="mb-md-0 mb-2"
+                            value={state?.lastName}
+                            onChange={(lastName) => setState({ ...state, lastName })}
+                          />
                         </div>
                       </div>
                       <div className="row mb-md-3 mb-0 align-items-baseline">
@@ -82,17 +137,15 @@ export default function EditProfile() {
                           </h5>
                         </div>
                         <div className="col-md-8">
-                          <input type="text" name placeholder={12337234} className="mb-md-0 mb-2" />
-                        </div>
-                      </div>
-                      <div className="row mb-md-3 mb-0 align-items-baseline">
-                        <div className="col-md-4">
-                          <h5 className="h_20 mb-md-0 mb-2 baijamjuree text-body font-weight-bold">
-                            Email Address
-                          </h5>
-                        </div>
-                        <div className="col-md-8">
-                          <input type="email" name placeholder="test@testing.com" className="mb-md-0 mb-2" />
+                          <InputPhone
+                            placeholder="Enter Phone Number"
+                            country={state?.phoneNumber?.dialCode}
+                            value={state?.phoneNumber?.number}
+                            onChange={(dialCode, countryCode, number) => {
+                              setState({ ...state, phoneNumber: { dialCode, countryCode, number } });
+                            }}
+                          />
+                          <br />
                         </div>
                       </div>
                       <div className="row mb-md-3 mb-0 align-items-baseline">
@@ -102,12 +155,14 @@ export default function EditProfile() {
                           </h5>
                         </div>
                         <div className="col-md-8">
-                          <input
-                            type="text"
-                            name
-                            placeholder="Lorem Ipsum Dolor Sit Amet"
-                            className="mb-md-0 mb-2"
-                          />
+                          <select onChange={(e) => handleChangeCountry(e)}>
+                            <option value={state?.country}>{state?.country}</option>
+                            {countries?.map((val, i) => (
+                              <option key={i} value={`${val.isoCode}?${val.name}`}>
+                                {val.name}
+                              </option>
+                            ))}
+                          </select>
                         </div>
                       </div>
                       <div className="row mb-md-3 mb-0 align-items-baseline">
@@ -115,7 +170,18 @@ export default function EditProfile() {
                           <h5 className="h_20 mb-md-0 mb-2 baijamjuree text-body font-weight-bold">City</h5>
                         </div>
                         <div className="col-md-8">
-                          <input type="text" name placeholder="Lorem Ipsum" className="mb-md-0 mb-2" />
+                          {loadingCities ? (
+                            <Spinner />
+                          ) : (
+                            <select onChange={(e) => setState({ ...state, city: e.target.value })}>
+                              <option value={state?.city}>{state?.city}</option>
+                              {cities?.map((val, i) => (
+                                <option key={i} value={val.name}>
+                                  {val.name}
+                                </option>
+                              ))}
+                            </select>
+                          )}
                         </div>
                       </div>
                       <div className="row mb-md-3 mb-0 align-items-baseline">
@@ -125,11 +191,12 @@ export default function EditProfile() {
                           </h5>
                         </div>
                         <div className="col-md-8">
-                          <input
+                          <Input
                             type="text"
-                            name
-                            placeholder="Lorem Ipsum Dolor Sit Amet"
+                            placeholder="Mark"
                             className="mb-md-0 mb-2"
+                            value={state?.address}
+                            onChange={(address) => setState({ ...state, address })}
                           />
                         </div>
                       </div>
@@ -140,18 +207,24 @@ export default function EditProfile() {
                           </h5>
                         </div>
                         <div className="col-md-8">
-                          <input type="text" className="mb-md-0 mb-2" />
+                          <Input
+                            type="text"
+                            className="mb-md-0 mb-2"
+                            value={state?.zipCode}
+                            onChange={(zipCode) => setState({ ...state, zipCode })}
+                          />
                         </div>
                       </div>
                       <div className="row">
                         <div className="col-md-12">
-                          <button
-                            className="btn_orange d-block px-5 py-3"
+                          <Button
                             type="button"
-                            onclick="location.href='change_password.php'"
+                            className="btn_orange d-block px-5 py-3"
+                            loading={isLoading}
+                            onClick={handleUpdateProfile}
                           >
                             UPDATE <img src="assets/images/arrow_right_white.png" alt="" />
-                          </button>
+                          </Button>
                         </div>
                       </div>
                     </form>

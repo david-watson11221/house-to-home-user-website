@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 import { changePassword } from "../../../services";
 
+import Input from "../../components/form_elements/Input";
+import Button from "../../components/form_elements/Button";
 import Success from "../../components/alerts/Success.Alert";
 import Error from "../../components/alerts/Error.Alert";
 
@@ -41,30 +43,39 @@ export default function ChangePassword() {
                 </div>
                 <div className="col-md-12">
                   <div className="paschan">
-                    <input type="password" name placeholder="Current Password*" />
+                    <Input
+                      type="password"
+                      placeholder="Current Password*"
+                      value={state?.currentPassword}
+                      onChange={(currentPassword) => setState({ ...state, currentPassword })}
+                    />
                   </div>
                 </div>
                 <div className="col-md-12">
                   <div className="paschan">
-                    <input type="password" name placeholder="New Password*" />
-                    <i className="far fa-eye-slash toggle_password" />
+                    <Input
+                      type="password"
+                      placeholder="New Password*"
+                      value={state?.newPassword}
+                      onChange={(newPassword) => setState({ ...state, newPassword })}
+                    />
                   </div>
                 </div>
                 <div className="col-md-12">
                   <div className="paschan">
-                    <input type="password" name placeholder="Confirm Password*" />
-                    <i className="far fa-eye-slash toggle_password" />
+                    <Input
+                      type="password"
+                      placeholder="Confirm Password*"
+                      value={state?.confirmPassword}
+                      onChange={(confirmPassword) => setState({ ...state, confirmPassword })}
+                    />
                   </div>
                 </div>
                 <div className="col-md-12">
                   <div className="button">
-                    <button
-                      type="button"
-                      onclick="location.href='sign-in.php'"
-                      className="btn_orange h_22 py-3 px-5"
-                    >
+                    <Button loading={isLoading} onClick={handleSubmit} className="btn_orange h_22 py-3 px-5">
                       UPDATE <img src="assets/images/arrow_right_white.png" alt="" />
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </div>
