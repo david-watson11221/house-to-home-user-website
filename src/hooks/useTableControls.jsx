@@ -1,28 +1,16 @@
 import { useState } from "react";
 
-export function useTableControls({
-  defaultStatus = "",
-  defaultPerPage = 10,
-  defaultSearchString = "",
-  defaultFrom = "",
-  defaultTo = "",
-} = {}) {
+export function useTableControls({ defaultType = "", defaultPerPage = 10, defaultCategory = "" } = {}) {
   const [perPage, setPerPage] = useState(defaultPerPage);
-  const [status, setStatus] = useState(defaultStatus);
-  const [searchString, setSearchString] = useState(defaultSearchString);
-  const [from, setFrom] = useState(defaultFrom);
-  const [to, setTo] = useState(defaultTo);
+  const [type, setType] = useState(defaultType);
+  const [category, setCategory] = useState(defaultCategory);
 
   return {
     perPage,
     setPerPage,
-    status,
-    setStatus,
-    searchString,
-    setSearchString,
-    from,
-    setFrom,
-    to,
-    setTo,
+    type,
+    setType,
+    category,
+    setCategory,
   };
 }

@@ -72,7 +72,7 @@ export const ROUTES = [
   {
     title: "Contact Us",
     path: "/contact-us",
-    type: "private",
+    type: "public",
     component: ContactUs,
   },
 ];
