@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 
+import { queryClient } from "../../..";
 import { getProducts } from "../../../services";
 
 import Filter from "./components/Filter";
 import ItemCard from "./components/ItemCard";
 
-export default function Catalog() {
+export default function Catalog({ heading, queryCacheKey }) {
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(30);
   const [type, setType] = useState(0);
   const [category, setCategory] = useState("");
 
   const { isFetching, isLoading, data, refetch } = useQuery(
-    ["cars", page, perPage, category, type],
-    () => getProducts(page, perPage, category, type),
+    [queryCacheKey, page, perPage, category, type],
+    () => getProducts(page, perPage, type, category),
     {
       keepPreviousData: true,
       refetchOnWindowFocus: false,
@@ -23,8 +24,8 @@ export default function Catalog() {
 
   useEffect(() => {
     if (data?.data?.logs?.hasNextPage) {
-      queryClient.prefetchQuery(["cars", page + 1, perPage, category, type], () =>
-        getCars(page + 1, perPage, category, type)
+      queryClient.prefetchQuery([queryCacheKey, page + 1, perPage, category, type], () =>
+        getProducts(page + 1, perPage, type, category)
       );
     }
   }, [data, page, queryClient]);
@@ -40,7 +41,7 @@ export default function Catalog() {
           </div>
           <div className="col-md-9">
             <div className="store_right">
-              <h3 className="h_57 black">Store</h3>
+              <h3 className="h_57 black">{heading}</h3>
               <div className="row">
                 {isFetching || isLoading ? (
                   <div></div>

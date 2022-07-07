@@ -54,7 +54,7 @@ export default function Faqs() {
         <div className="row align-items-center">
           <div className="col-md-4">
             <div className="faqs_image">
-              <img src="assets/images/faqs_img.png" alt="" />
+              {/* <img src="assets/images/faqs_img.png" alt="" /> */}
               <div id="faqs"></div>
             </div>
           </div>

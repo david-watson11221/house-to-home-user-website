@@ -59,6 +59,12 @@ export const ROUTES = [
     type: "public",
     component: Store,
   },
+  {
+    title: "Store",
+    path: "/store",
+    type: "public",
+    component: Store,
+  },
 
   // @MY Account
   {
