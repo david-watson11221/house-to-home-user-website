@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useQuery } from "react-query";
+
+import { getProducts } from "../../../services";
 
 import Filter from "./components/Filter";
 import ItemCard from "./components/ItemCard";
@@ -11,7 +14,7 @@ export default function Catalog() {
 
   const { isFetching, isLoading, data, refetch } = useQuery(
     ["cars", page, perPage, category, type],
-    () => getCars(page, perPage, category, type),
+    () => getProducts(page, perPage, category, type),
     {
       keepPreviousData: true,
       refetchOnWindowFocus: false,

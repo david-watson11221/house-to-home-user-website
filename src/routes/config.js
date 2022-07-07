@@ -8,7 +8,12 @@ import Home from "../views/modules/home";
 import Profile from "../views/modules/my_account";
 import EditProfile from "../views/modules/my_account/EditProfile";
 import ChangePassword from "../views/modules/my_account/ChangePassword";
+
 import ContactUs from "../views/modules/contact_us";
+import AboutUs from "../views/modules/about_us";
+
+import Store from "../views/modules/store";
+import Faqs from "../views/modules/faqs";
 
 export const ROUTES = [
   {
@@ -48,8 +53,14 @@ export const ROUTES = [
     component: Home,
   },
 
-  // MY Account
+  {
+    title: "Store",
+    path: "/store",
+    type: "public",
+    component: Store,
+  },
 
+  // @MY Account
   {
     title: "My Profile",
     path: "/profile",
@@ -69,6 +80,18 @@ export const ROUTES = [
     component: ChangePassword,
   },
 
+  {
+    title: "About Us",
+    path: "/about-us",
+    type: "public",
+    component: AboutUs,
+  },
+  {
+    title: "FAQs",
+    path: "/faqs",
+    type: "public",
+    component: Faqs,
+  },
   {
     title: "Contact Us",
     path: "/contact-us",
